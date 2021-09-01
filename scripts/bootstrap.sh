@@ -374,7 +374,22 @@ print_urls_passwords () {
 
 }
 
+
+# DEBUG
+set -x
+RWX_STORAGE_CLASS={RWX_STORAGE_CLASS:-""}
+set_storage_class_platform_navigator () {
+  if [[ -n "${RWX_STORAGE_CLASS}" ]]; then
+    echo "Setting storage class for platform navigator zen to ${RWX_STORAGE_CLASS}"
+    return ${RWX_STORAGE_CLASS}
+  fi
+  oc get sc -o jsonpath='{.items[*].metadata.name}'
+}
+set_storage_class_platform_navigator
+exit 0
 # main
+
+
 
 fork_repos
 
